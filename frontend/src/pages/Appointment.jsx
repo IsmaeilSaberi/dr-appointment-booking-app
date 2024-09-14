@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import { assets } from "../assets/assets";
+import RelatedDoctors from "../components/RelatedDoctors";
 
 const Appointment = () => {
   const { docId } = useParams();
@@ -14,7 +15,7 @@ const Appointment = () => {
   const [slotTime, setSlotTime] = useState("");
 
   const fetchDocInfo = () => {
-    const docInfo = doctors.find((doc) => (doc._id = docId));
+    const docInfo = doctors.find((doc) => doc._id === docId);
     setDocInfo(docInfo);
   };
 
@@ -163,6 +164,8 @@ const Appointment = () => {
             Book an appointment
           </button>
         </div>
+        {/* Listing Realted Doctors */}
+        <RelatedDoctors docId={docId} speciality={docInfo.speciality} />
       </div>
     )
   );
