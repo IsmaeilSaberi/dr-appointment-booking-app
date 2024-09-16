@@ -47,7 +47,15 @@ const addDoctor = async (req, res) => {
 };
 
 // fuction for list Doctors
-const listDoctors = async (req, res) => {};
+const listDoctors = async (req, res) => {
+  try {
+    const doctors = await doctorModel.find({});
+    res.json({ success: true, doctors });
+  } catch (error) {
+    le.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
 
 // fuction for removing Doctor
 const removeDoctor = async (req, res) => {};
