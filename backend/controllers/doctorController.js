@@ -58,9 +58,27 @@ const listDoctors = async (req, res) => {
 };
 
 // fuction for removing Doctor
-const removeDoctor = async (req, res) => {};
+const removeDoctor = async (req, res) => {
+  try {
+    await doctorModel.findByIdAndDelete(req.body.id);
+    res.json({ success: true, message: "Doctor removed" });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
 
 // fuction for single Doctor info
-const singleDoctor = async (req, res) => {};
+const singleDoctor = async (req, res) => {
+  try {
+    const { doctorId } = req.body;
+    const doctor = await doctorModel.findById(doctorId);
+
+    res.json({ success: true, doctor });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
 
 export { addDoctor, listDoctors, removeDoctor, singleDoctor };
